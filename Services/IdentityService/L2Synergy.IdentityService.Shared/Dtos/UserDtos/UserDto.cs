@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace L2Synergy.IdentityService.Shared.Dtos.UserDtos
+{
+    public record UserDto(string Id, string Username, string Email, string MemberId, string? Role = null);
+
+}

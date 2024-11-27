@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using L2Synergy.IdentityService.Application.Queries.UserQueries.GetUsers;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
