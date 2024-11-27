@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="Queries\RoleQueries\GetRoles\" />
+    <Folder Include="Queries\UserQueries\GetUserById\" />
+    <Folder Include="Queries\UserQueries\GetUserByMemberId\" />
+    <Folder Include="Queries\UserQueries\GetUserByRefreshToken\" />
+    <Folder Include="Queries\UserQueries\LoginUser\" />
+    <Folder Include="Queries\UserQueries\LogoutUser\" />
+    <Folder Include="TokenService\" />
+  </ItemGroup>
+
+</Project>
