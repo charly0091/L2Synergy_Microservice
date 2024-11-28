@@ -14,7 +14,7 @@ namespace L2Synergy.IdentityService.MessageWorker
         {
             _logger = logger;
             var client = new MongoClient("mongodb://localhost:27017");
-            var database = client.GetDatabase("Synergy_Identity");
+            var database = client.GetDatabase("L2Synergy_Identity");
             _collection = database.GetCollection<User>("User");
         
         }
