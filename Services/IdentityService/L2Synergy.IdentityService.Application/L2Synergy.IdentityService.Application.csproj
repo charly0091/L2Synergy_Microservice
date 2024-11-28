@@ -8,10 +8,6 @@
 
   <ItemGroup>
     <Folder Include="Configurations\" />
-    <Folder Include="Queries\UserQueries\GetUserById\" />
-    <Folder Include="Queries\UserQueries\GetUserByRefreshToken\" />
-    <Folder Include="Queries\UserQueries\LoginUser\" />
-    <Folder Include="Queries\UserQueries\LogoutUser\" />
     <Folder Include="TokenService\" />
   </ItemGroup>
 
