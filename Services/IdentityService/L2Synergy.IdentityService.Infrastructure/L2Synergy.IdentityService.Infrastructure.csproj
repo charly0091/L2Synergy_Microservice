@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\L2Synergy.IdentityService.Domain\L2Synergy.IdentityService.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

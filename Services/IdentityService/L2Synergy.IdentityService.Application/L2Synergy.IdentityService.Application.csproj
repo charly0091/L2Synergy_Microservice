@@ -7,16 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Configurations\" />
-    <Folder Include="TokenService\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\L2Synergy.Shared\L2Synergy.Shared.csproj" />
+    <ProjectReference Include="..\L2Synergy.IdentityService.Infrastructure\L2Synergy.IdentityService.Infrastructure.csproj" />
     <ProjectReference Include="..\L2Synergy.IdentityService.Shared\L2Synergy.IdentityService.Shared.csproj" />
   </ItemGroup>
 
