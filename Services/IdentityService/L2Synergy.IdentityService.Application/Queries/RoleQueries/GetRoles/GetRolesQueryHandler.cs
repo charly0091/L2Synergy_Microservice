@@ -24,11 +24,20 @@ namespace L2Synergy.IdentityService.Application.Queries.RoleQueries.GetRoles
 
         public async Task<Result<RoleDto>> Handle(GetRolesQuery request, CancellationToken cancellationToken)
         {
-            var roles = await roleRepo.GetAllAsync(cancellationToken: cancellationToken);
+            try
+            {
+                var roles = await roleRepo.GetAllAsync(cancellationToken: cancellationToken);
 
-            List<RoleDto> roleDto = roles.Select(_ => new RoleDto(_.Id, _.RoleName, _.Description)).ToList();
+                List<RoleDto> roleDto = roles.Select(_ => new RoleDto(_.Id, _.RoleName, _.Description)).ToList();
 
-            return Result<RoleDto>.Success(statusCode: 200, values: roleDto);
+                return Result<RoleDto>.Success(statusCode: 200, values: roleDto);
+
+            }
+            catch (Exception ex)
+            {
+                return Result<RoleDto>.Failure(statusCode: 500, "GetRolesQueryHandler Error: " + ex.Message);
+            }
+
 
         }
     }

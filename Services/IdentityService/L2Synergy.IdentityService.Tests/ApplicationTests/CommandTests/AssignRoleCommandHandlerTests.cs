@@ -29,7 +29,11 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.CommandTests
             var result = await handler.Handle(command, default);
 
             // Assert
-            Assert.Equal(Result.Failure(404), result);
+            //Assert.Equal(Result.Failure(404), result);
+            Assert.False(result.IsSuccess);
+            Assert.Equal(404, result.StatusCode);
+            Assert.Null(result.Message);
+            Assert.Null(result.Errors);
         }
 
         [Fact]
@@ -45,7 +49,12 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.CommandTests
             var result = await handler.Handle(command, default);
 
             // Assert
-            Assert.Equal(Result.Failure(404), result);
+            // Assert viejo, al ser distintas instancias de objetos, nos da el test como no pasado, por eso comparamos propiedades
+            //Assert.Equal(Result.Failure(404), result);
+            Assert.False(result.IsSuccess);
+            Assert.Equal(404, result.StatusCode);
+            Assert.Null(result.Message);
+            Assert.Null(result.Errors);
         }
 
         [Fact]
@@ -62,7 +71,10 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.CommandTests
             var result = await handler.Handle(command, default);
 
             // Assert
-            Assert.Equal(Result.Success(204), result);
+            Assert.True(result.IsSuccess);
+            Assert.Equal(204, result.StatusCode);
+            Assert.Null(result.Message);
+            Assert.Null(result.Errors);
             Assert.Same(role, user.Role);
             mockUserRepo.Verify(r => r.Update(user, default!), Times.Once());
         }
@@ -73,14 +85,22 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.CommandTests
             // Arrange
             var command = new AssignRoleCommand { UserId = Guid.NewGuid().ToString(), RoleId = Guid.NewGuid().ToString() };
             var user = CreateTestUser();
-            user.Role = CreateTestRole();
+            var role = CreateTestRole();
+            user.Role = role;
             mockUserRepo.Setup(r => r.GetAsync(It.IsAny<Expression<Func<User, bool>>>(), default)).ReturnsAsync(user);
+            mockRoleRepo.Setup(r => r.GetAsync(It.IsAny<Expression<Func<Role, bool>>>(), default)).ReturnsAsync(role);
 
             // Act
             var result = await handler.Handle(command, default);
 
             // Assert
-            Assert.Equal(Result.Failure(400, error: "User already has this role!"), result);
+            //Assert.Equal(Result.Failure(400, error: "User already has this role!"), result);
+            Assert.True(
+                result.IsSuccess == false &&
+                result.StatusCode == 400 &&
+                result.Message == "User already has this role!",
+                "Result does not match expected values"
+            );
         }
 
         private static User CreateTestUser()

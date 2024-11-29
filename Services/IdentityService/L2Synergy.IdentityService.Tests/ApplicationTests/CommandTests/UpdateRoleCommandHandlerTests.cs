@@ -37,17 +37,12 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.CommandTests
                 RoleName = "Old Name",
                 Description = "Old Description"
             };
-
             var mockRepo = new Mock<IRoleRepository>();
             mockRepo.Setup(r => r.GetAsync(It.IsAny<Expression<Func<Role, bool>>>(), default))
                 .ReturnsAsync(role);
 
-            //mockRepo.Setup(r => r.GetAsync(x => x.Id == "", default)).ReturnsAsync(role);
-
+            var command = new UpdateRoleCommand(new UpdateRoleDto(role.Id, "New Name", "New Description"));
             var handler = new UpdateRoleCommandHandler(mockRepo.Object);
-
-            var command = new UpdateRoleCommand(new UpdateRoleDto(Guid.NewGuid().ToString(), "Admin", "Allows: GET - POST"));
-
 
             // Act
             var result = await handler.Handle(command, default);

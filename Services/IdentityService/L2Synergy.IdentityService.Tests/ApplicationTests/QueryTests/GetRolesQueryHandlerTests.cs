@@ -42,8 +42,8 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.QueryTests
             // Assert
             Assert.True(result.IsSuccess);
             Assert.Equal(2, result.Values!.Count());
-            Assert.Contains(result.Value!.Id, adminRoleId);
-            Assert.Contains(result.Value.Id, userRoleId);
+            Assert.Contains(adminRoleId, result.Values.Select(r => r.Id));
+            Assert.Contains(userRoleId, result.Values.Select(r => r.Id));
         }
 
         [Fact]

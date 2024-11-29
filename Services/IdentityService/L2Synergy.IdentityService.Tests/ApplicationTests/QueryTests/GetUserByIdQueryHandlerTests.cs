@@ -2,6 +2,7 @@
 using L2Synergy.IdentityService.Domain.Models;
 using L2Synergy.IdentityService.Infrastructure.Repositories.Contracts;
 using L2Synergy.IdentityService.Shared.Dtos.UserDtos;
+using L2Synergy.Shared.Results;
 using Moq;
 using System.Linq.Expressions;
 
@@ -31,7 +32,8 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.QueryTests
             var result = await _handler.Handle(query, CancellationToken.None);
 
             // Assert
-            Assert.IsType<UserDto?>(result.Value);
+            Assert.False(result.IsSuccess);
+            Assert.Equal(404, result.StatusCode);
         }
 
         [Fact]
@@ -49,7 +51,7 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.QueryTests
             var result = await _handler.Handle(query, CancellationToken.None);
 
             // Assert
-            Assert.IsType<UserDto>(result);
+            Assert.IsType<Result<UserDto>>(result);
             Assert.Equal("test", result.Value!.Username);
         }
 

@@ -52,7 +52,7 @@ namespace L2Synergy.IdentityService.Tests.ApplicationTests.QueryTests
             var result = await _handler.Handle(query, CancellationToken.None);
 
             // Assert
-            Assert.False(!result.IsSuccess);
+            Assert.False(result.IsSuccess);
             Assert.Equal(404, result.StatusCode);
         }
     }

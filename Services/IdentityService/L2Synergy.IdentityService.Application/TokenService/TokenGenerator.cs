@@ -63,8 +63,9 @@ namespace L2Synergy.IdentityService.Application.TokenService
             var token = securityToken.WriteToken(createdToken);
             var refreshToken = GenerateRefreshToken();
 
-
-            var userDto = new UserDto(user.Id, user.Username, user.Email, user.MemberId, user.Role!.RoleName ?? string.Empty);
+            //se modifico xq el Role en la prueba puede venir nulo, y rompe por el operador de aserción 
+            //var userDto = new UserDto(user.Id, user.Username, user.Email, user.MemberId, user.Role!.RoleName ?? string.Empty);
+            var userDto = new UserDto(user.Id, user.Username, user.Email, user.MemberId, user.Role?.RoleName ?? string.Empty);
 
             return new TokenDto(
                 Token: token,

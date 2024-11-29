@@ -30,7 +30,8 @@ namespace L2Synergy.IdentityService.Application.Queries.UserQueries.GetUserByRef
 
             var token = tokenGenerator.GenerateToken(user);
             user.Token = token.RefreshToken;
-            user.TokenExpire = Convert.ToDateTime(token.RefreshExpire);
+            //user.TokenExpire = Convert.ToDateTime(token.RefreshExpire);
+            user.TokenExpire = token.RefreshExpire.DateTime;
 
             await userRepo.Update(user);
             return Result<TokenDto>.Success(token);
