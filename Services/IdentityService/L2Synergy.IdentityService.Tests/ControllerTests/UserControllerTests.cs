@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using L2Synergy.IdentityService.Application.Queries.UserQueries.LoginUser;
 using L2Synergy.IdentityService.Domain.Models;
+using L2Synergy.IdentityService.Application.Queries.UserQueries.GetUserByRefreshToken;
 
 namespace L2Synergy.IdentityService.Tests.ControllerTests
 {
@@ -74,33 +75,48 @@ namespace L2Synergy.IdentityService.Tests.ControllerTests
         public async Task Relogin_WithValidToken_ReturnsOkResult()
         {
             // Arrange
-            var refreshToken = "token";
-            var userResult = Result<LoginDto>.Success(200);
-            _mediatorMock.Setup(x => x.Send(refreshToken, default))
-                         .ReturnsAsync(userResult);
+            var refreshToken = "valid_refresh_token";
+            var user = new User();
+            var tokenDto = new TokenDto("accessToken", new DateTimeOffset(), "refreshToken",
+                new DateTimeOffset(), new UserDto(user.Id, user.Username, user.Email, user.MemberId));
+
+            // Usa IResult en lugar de Result
+            IResult<TokenDto> loginResult = Result<TokenDto>.Success(tokenDto);
+
+            _mediatorMock.Setup(x => x.Send(
+                It.Is<GetUserByRefreshTokenQuery>(q => q.RefreshToken == refreshToken),
+                default))
+                .Returns(Task.FromResult(loginResult));
 
             // Act
             var result = await _controller.Relogin(refreshToken);
 
             // Assert
             var okResult = Assert.IsType<OkObjectResult>(result);
-            Assert.Equal(userResult.StatusCode, okResult.StatusCode);
+            Assert.Equal(200, okResult.StatusCode);
+            Assert.Equal(tokenDto, okResult.Value);
         }
 
         [Fact]
         public async Task Relogin_WithInvalidToken_ReturnsNotFound()
         {
             // Arrange
-            var refreshToken = "token";
-            var userResult = Result<LoginDto>.Success(200);
-            _mediatorMock.Setup(x => x.Send(refreshToken, default))
-                         .ReturnsAsync(userResult);
+            var refreshToken = "invalid_refresh_token";
+
+            // Usa IResult en lugar de Result
+            IResult<TokenDto> loginResult = Result<TokenDto>.Failure(404);
+
+            _mediatorMock.Setup(x => x.Send(
+                It.Is<GetUserByRefreshTokenQuery>(q => q.RefreshToken == refreshToken),
+                default))
+                .Returns(Task.FromResult(loginResult));
 
             // Act
             var result = await _controller.Relogin(refreshToken);
 
             // Assert
-            Assert.IsType<NotFoundObjectResult>(result);
+            var notFoundResult = Assert.IsType<NotFoundObjectResult>(result);
+            Assert.Equal(404, notFoundResult.StatusCode);
         }
 
 

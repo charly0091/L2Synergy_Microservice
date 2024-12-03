@@ -31,6 +31,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L2Synergy.IdentityService.M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "workerprueba", "Services\IdentityService\workerprueba\workerprueba.csproj", "{7C896334-B8EA-4B6A-9D86-A07A64F65F73}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "L2Synergy.Gateway", "Gateway\WebApplication1\L2Synergy.Gateway.csproj", "{004738CE-32A6-4563-AC71-34CF45A346A7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{7C896334-B8EA-4B6A-9D86-A07A64F65F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7C896334-B8EA-4B6A-9D86-A07A64F65F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7C896334-B8EA-4B6A-9D86-A07A64F65F73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{004738CE-32A6-4563-AC71-34CF45A346A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{004738CE-32A6-4563-AC71-34CF45A346A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{004738CE-32A6-4563-AC71-34CF45A346A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{004738CE-32A6-4563-AC71-34CF45A346A7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,5 +94,6 @@ Global
 		{9B657322-38C2-4E4C-8B83-ADB32B5236FC} = {279E0354-DAC8-4041-A456-8F7EF6077006}
 		{B2BDABCF-D9CB-4736-8737-BB265E2244E5} = {279E0354-DAC8-4041-A456-8F7EF6077006}
 		{7C896334-B8EA-4B6A-9D86-A07A64F65F73} = {279E0354-DAC8-4041-A456-8F7EF6077006}
+		{004738CE-32A6-4563-AC71-34CF45A346A7} = {FA1BCDCA-FB43-460A-9127-8BE5854BD10B}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,6 @@
+@L2Synergy.Gateway_HostAddress = http://localhost:5286
+
+GET {{L2Synergy.Gateway_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
